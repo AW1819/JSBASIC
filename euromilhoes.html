@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Euromilhões</title>
+</head>
+<body>
+    <div id="cabeca">
+        <h1>EuroMilhões DWM 1819</h1>
+    </div>
+    <div id="controlo">
+        <button id="bgera">Gerar Chave</button>
+        <button id="blimpa">Limpar Chaves</button>
+    </div>
+    <div id="conteudo">
+        <div class="chave">
+            <ul class="numeros">
+                <li>2</li>
+                <li>9</li>
+                <li>13</li>
+                <li>22</li>
+                <li>45</li>
+            </ul>
+            <ul class="estrelas">
+                <li>5</li>
+                <li>12</li>
+            </ul>
+        </div>
+    </div>
+    <div id="rodape">
+        50% dos lucros são pró Prof.
+    </div>
+</body>
+<script>
+    var estrelas = new Array();
+    var numeros = [2,8,12,45,50];
+
+    estrelas.push(2);
+    estrelas.push(3);
+
+    var bgera = document.getElementById("bgera");
+    var blimpa = document.getElementById("blimpa");
+    
+    // bgera.onclick = mostraVars;
+    bgera.addEventListener("click",mostraVars);
+    bgera.addEventListener("click",dizOla);
+
+    blimpa.addEventListener("click", function () {
+        divConteudo = document.getElementById("conteudo");
+        console.log(divConteudo.innerHTML);
+        divConteudo.innerHTML = "";
+    });
+
+    function mostraVars() {
+        console.log("estrelas", estrelas);
+        console.log("numeros", numeros);
+    }
+
+    function dizOla() {
+        console.log("Olá");
+        bgera.removeEventListener("click",dizOla);
+    }
+
+
+
+
+</script>
+</html>
