@@ -61,9 +61,9 @@
     function dizOla() {
         console.log("Olá");
         //bgera.removeEventListener("click",dizOla);
-        geraChaveHTML(numeros,estrelas);
-
-
+        var novaChaveHTML = geraChaveHTML(numeros,estrelas);
+        divConteudo = document.getElementById("conteudo");
+        divConteudo.appendChild(novaChaveHTML);
     }
 
     function geraChaveHTML (anumeros,aestrelas) {
@@ -92,14 +92,9 @@
             newLI.innerHTML = aestrelas[i];
             newULestrelas.appendChild(newLI);
         }
-
         console.log(newDiv);
-
-
-
+        return newDiv;
     }
-
-
 
 </script>
 </html>
