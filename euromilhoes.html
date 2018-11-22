@@ -45,7 +45,7 @@
     
     // bgera.onclick = mostraVars;
     bgera.addEventListener("click",mostraVars);
-    bgera.addEventListener("click",dizOla);
+    bgera.addEventListener("click",geraChave);
 
     blimpa.addEventListener("click", function () {
         divConteudo = document.getElementById("conteudo");
@@ -58,9 +58,43 @@
         console.log("numeros", numeros);
     }
 
-    function dizOla() {
+    function geraAleatorio(num,min,max) {
+        var aleatorio = new Array();
+
+        // gerar 'num' numeros aleatorios
+        for (let i=0; i < num; i++) {
+            aleatorio[i] = min + Math.floor(Math.random() * (max-min+1));
+        }
+
+        return aleatorio;
+    }
+
+   function geraAleatorio2(num,min,max) {
+        var aleatorio = new Array();
+
+        // gerar 'num' numeros aleatorios diferentes
+        while(aleatorio.length < num) {
+            novo = min + Math.floor(Math.random() * (max-min+1));
+            if (!aleatorio.includes(novo)) {
+                aleatorio.push(novo);
+            }
+        }
+        
+        aleatorio.sort(ordena);
+
+        return aleatorio;
+    }
+
+    function ordena(a,b) {
+        return(a-b);
+    }
+
+    function geraChave() {
         console.log("Olá");
         //bgera.removeEventListener("click",dizOla);
+
+        numeros = geraAleatorio2(5,1,50);
+        estrelas = geraAleatorio2(2,1,12);
         var novaChaveHTML = geraChaveHTML(numeros,estrelas);
         divConteudo = document.getElementById("conteudo");
         divConteudo.appendChild(novaChaveHTML);
