@@ -60,9 +60,44 @@
 
     function dizOla() {
         console.log("Olá");
-        bgera.removeEventListener("click",dizOla);
+        //bgera.removeEventListener("click",dizOla);
+        geraChaveHTML(numeros,estrelas);
+
+
     }
 
+    function geraChaveHTML (anumeros,aestrelas) {
+        // criar o div da classe chave
+
+        var newDiv = document.createElement("div");
+        newDiv.className = "chave";
+
+        var newULnumeros = document.createElement("ul");
+        newULnumeros.className = "numeros";
+
+        var newULestrelas = document.createElement("ul");
+        newULestrelas.className = "estrelas";
+
+        newDiv.appendChild(newULnumeros);
+        newDiv.appendChild(newULestrelas);
+
+        anumeros.forEach(element => {
+            var newLI = document.createElement("li");
+            newLI.innerHTML = element;
+            newULnumeros.appendChild(newLI);
+        });
+
+        for (let i=0; i < aestrelas.length; i++) {
+            var newLI = document.createElement("li");
+            newLI.innerHTML = aestrelas[i];
+            newULestrelas.appendChild(newLI);
+        }
+
+        console.log(newDiv);
+
+
+
+    }
 
 
 
