@@ -69,4 +69,58 @@
         </div>
     </div>
 </body>
+<script>
+    var bget = document.getElementById("bget");
+
+    bget.addEventListener("click", loadRecords);
+
+    function loadRecords() {
+        fetch('discoteca.json')
+          .then(function (resposta) {
+              return resposta.json();
+          })
+          .then(function (dados) {
+              //alert(dados);
+              console.log(dados);
+              showRecords(dados);
+          })
+        //window.alert("Uiii! clickaste-me!!!!");
+    }
+
+    function showRecords(records) {
+        // identificar o div#content
+        divContent = document.getElementById("content");
+
+        records.discos.forEach(element => {
+            newRecord = document.createElement("div");
+            newRecord.className = "record";
+
+            newArtist = document.createElement("p");
+            newArtist.className = "artist";
+            newArtist.innerHTML = element.artista;
+
+            newCover = document.createElement("img");
+            newCover.className = "cover";
+            newCover.src = element.cover;
+
+            newAlbum = document.createElement("p");
+            newAlbum.className = "album";
+            newAlbum.innerHTML = element.album;
+            
+            newYear = document.createElement("p");
+            newYear.className = "year";
+            newYear.innerHTML = element.ano;
+
+            newRecord.appendChild(newArtist);
+            newRecord.appendChild(newCover);
+            newRecord.appendChild(newAlbum);
+            newRecord.appendChild(newYear);
+            divContent.append(newRecord);
+            console.log(newRecord);
+            
+        });
+
+    }
+
+</script>
 </html>
