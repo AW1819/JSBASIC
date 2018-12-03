@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js"></script>
+    <!--script href="js/mustache.js"></script-->
+    <style>
+        .record {
+            float: left;
+            width: 300px;
+            border-radius: 10px;
+            border-color: darkgrey;
+            border-style: solid;
+            background-color:whitesmoke;
+            padding: 2%;
+            margin : 10px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+        }
+        .record .artist {
+            text-align: center;
+            font-size: 2em;
+        }
+
+        .record .album {
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        .record .year {
+            text-align: center;
+            font-size: 0.75em;
+        }
+
+        .record .cover {
+            width : 80%;
+            height: 80%;
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+            text-align: center;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="control">
+        <button id="bget">Obter Discos</button>
+    </div>
+    <div id="content">
+        <div class="record">
+            <p class="artist">Rolling Stones</p>
+            <img class="cover" src="https://upload.wikimedia.org/wikipedia/en/c/c0/LetitbleedRS.jpg">
+            <p class="album">Let It Bleed</p>
+            <p class="year">1969</p>
+        </div>
+        <div class="record">
+            <p class="artist">Rolling Stones</p>
+            <img class="cover" src="https://upload.wikimedia.org/wikipedia/en/c/c0/LetitbleedRS.jpg">
+            <p class="album">Let It Bleed</p>
+            <p class="year">1969</p>
+        </div>
+        <div class="record">
+                <p class="artist">Rolling Stones</p>
+                <img class="cover" src="https://upload.wikimedia.org/wikipedia/en/c/c0/LetitbleedRS.jpg">
+                <p class="album">Let It Bleed</p>
+                <p class="year">1969</p>
+        </div>
+    </div>
+</body>
+<script>
+    var bget = document.getElementById("bget");
+
+    bget.addEventListener("click", loadRecords);
+
+    function loadRecords() {
+        fetch('discoteca.json')
+          .then(function (resposta) {
+              return resposta.json();
+          })
+          .then(function (dados) {
+              //alert(dados);
+              console.log(dados);
+              //showRecords(dados);
+              showRecordsTemplate(dados)
+          })
+        //window.alert("Uiii! clickaste-me!!!!");
+    }
+
+    function showRecordsTemplate(records) {
+        templateElement = document.getElementById("recordTemplate");
+        templateString = templateElement.innerHTML;
+        recordsHTML = Mustache.render(templateString,records);
+        divContent = document.getElementById("content");
+        divContent.innerHTML += recordsHTML;
+    }
+
+    function showRecords(records) {
+        // identificar o div#content
+        divContent = document.getElementById("content");
+
+        records.discos.forEach(element => {
+            newRecord = document.createElement("div");
+            newRecord.className = "record";
+
+            newArtist = document.createElement("p");
+            newArtist.className = "artist";
+            newArtist.innerHTML = element.artista;
+
+            newCover = document.createElement("img");
+            newCover.className = "cover";
+            newCover.src = element.cover;
+
+            newAlbum = document.createElement("p");
+            newAlbum.className = "album";
+            newAlbum.innerHTML = element.album;
+            
+            newYear = document.createElement("p");
+            newYear.className = "year";
+            newYear.innerHTML = element.ano;
+
+            newRecord.appendChild(newArtist);
+            newRecord.appendChild(newCover);
+            newRecord.appendChild(newAlbum);
+            newRecord.appendChild(newYear);
+            divContent.append(newRecord);
+            console.log(newRecord);
+            
+        });
+
+    }
+
+</script>
+
+
+
+<script id="recordTemplate" type="x-tmpl-mustache">
+        {{#discos}}
+        <div class="record">
+                <p class="artist">{{artista}}</p>
+                <img class="cover" src="{{cover}}">
+                <p class="album">{{album}}</p>
+                <p class="year">{{ano}}</p>
+        </div>
+        {{/discos}}
+</script>
+
+</html>
