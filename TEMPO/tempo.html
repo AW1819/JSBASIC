@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <div id="control">
+        <input type="text" name="local" id="ilocal" placeholder="Insira o local">
+        <button id="bget">
+            Obter Tempo
+        </button>
+    </div>
+    
+</body>
+<script>
+    var bget = document.getElementById("bget");
+    bget.addEventListener("click",obterTempo);
+
+    function obterTempo() {
+        var appid = "fa454439b36b644d49e751a9b0afbcfc";
+        var local = document.getElementById("ilocal").value
+        //alert(local);
+
+        var urlbase = "http://api.openweathermap.org/data/2.5/weather?";
+        var search  = "q="+local;
+        var appid   = "&appid="+appid;
+        var units   = "&units=metric";
+
+        var url = urlbase + search + appid + units;
+
+        alert(url);
+    }
+
+</script>
+</html>
