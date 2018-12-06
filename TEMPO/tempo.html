@@ -13,6 +13,7 @@
             Obter Tempo
         </button>
     </div>
+    <div id="content"></div>
     
 </body>
 <script>
@@ -28,10 +29,29 @@
         var search  = "q="+local;
         var appid   = "&appid="+appid;
         var units   = "&units=metric";
+        var lang    = "&lang=pt";
 
-        var url = urlbase + search + appid + units;
+        var url = urlbase + search + appid + units + lang;
 
         alert(url);
+
+        fetch(url)
+            .then(function (resposta) {
+                return resposta.json();
+            })
+            .then (function (dados) {
+                div = document.getElementById("content");
+                tempo = document.createElement("p");
+                tempo.innerHTML =   dados.name + " - " +
+                                    dados.weather[0].description + " - " + 
+                                    dados.main.temp + "ºC";
+
+                icon = "http://openweathermap.org/img/w/"+dados.weather[0].icon+".png"
+                div.appendChild(tempo);
+                img = document.createElement("img");
+                img.src = icon;
+                tempo.appendChild(img);
+            })
     }
 
 </script>
