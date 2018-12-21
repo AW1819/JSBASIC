@@ -1,0 +1,15 @@
+
+teste
+Key: 173ab8330684ad5e085d5f9c2d3699f7
+Secret: 33c0e6254b3b66de
+
+
+
+ https://api.flickr.com/services/rest/?
+ method=flickr.photos.search
+ &api_key=173ab8330684ad5e085d5f9c2d3699f7
+ &text=viana+do+castelo
+ &extras=url_m
+ &per_page=5
+ &format=json
+ &nojsoncallback=1

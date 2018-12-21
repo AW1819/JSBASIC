@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.js"></script-->
+    <script src="js/jquery-3.3.1.js"></script>
+    <title>Document</title>
+    <script>
+        $(document).ready(function () {
+            $("#bsearch").click(function () {
+                $.ajax({
+                    url  : "https://api.flickr.com/services/rest/",
+                    data : {
+                        "method"    :"flickr.photos.search",
+                        "api_key"   :"173ab8330684ad5e085d5f9c2d3699f7",
+                        "text"      :$("#search").val(),
+                        "extras"    :"url_m",
+                        "per_page"  :5,
+                        "format"    :"json",
+                        "nojsoncallback" : 1
+                    },
+                    dataType : "json",
+                    method : "get",
+                    success : function (dados) {
+                        //alert(dados.photos.photo[0].url_m);
+                        dados.photos.photo.forEach(element => {
+                            novaimagem = $("<img/>").attr("src",element.url_m);
+                            $("#conteudo").append(novaimagem);
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+</head>
+<body>
+    <div id="controlo">
+        <input type="text" id="search" placeholder="Pesquise Fotos">
+        <button id="bsearch">Procura Fotos</button>
+    </div>
+    <div id="conteudo">
+    </div>
+</body>
+</html>
